@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nova Tech</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ---------- Rang aur fonts (yahan se badal sakti hain) ---------- */
+    :root {
+      --bg: #0a0a14;
+      --nav-bg: #070710;
+      --card: #120f28;
+      --field: #08080f;
+      --line: #2a1f5e;
+      --purple: #7c3aed;
+      --purple-soft: #a855f7;
+      --text: #ffffff;
+      --muted: #9a9bb8;
+      --head: "Oswald", "Arial Narrow", sans-serif;
+      --body: "Inter", Arial, sans-serif;
+      --mono: "JetBrains Mono", "Courier New", monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    body { background: var(--bg); color: var(--text); font-family: var(--body); line-height: 1.6; }
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    section { padding: 80px 0; }
+    h1, h2, h3 { font-family: var(--head); font-weight: 500; text-transform: uppercase; line-height: 1.1; }
+    h2 { font-size: clamp(2.2rem, 5vw, 3.2rem); }
+    .label { display: block; font-family: var(--mono); font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--purple-soft); margin-bottom: 14px; }
+    :focus-visible { outline: 2px solid var(--purple-soft); outline-offset: 3px; }
+
+    /* ---------- Navbar ---------- */
+    nav { position: sticky; top: 0; z-index: 10; background: var(--nav-bg); border-bottom: 1px solid var(--line); }
+    nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 76px; }
+    .logo { display: flex; align-items: center; gap: 12px; font-family: var(--head); font-size: 1.6rem; text-transform: uppercase; }
+    .logo-icon { width: 34px; height: 34px; border: 2px solid var(--purple-soft); border-radius: 6px; display: grid; place-items: center; font-size: 1.1rem; color: var(--purple-soft); }
+    nav ul { display: flex; gap: 32px; list-style: none; }
+    nav ul a { font-family: var(--mono); font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+    nav ul a:hover { color: var(--text); }
+    .btn { display: inline-block; background: var(--purple); color: #fff; border: 1px solid var(--purple); cursor: pointer; font-family: var(--mono); font-size: .78rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; padding: 14px 24px; border-radius: 4px; }
+    .btn:hover { background: #6d28d9; }
+    .btn-ghost { background: transparent; border-color: var(--line); color: var(--text); }
+    .btn-ghost:hover { background: var(--card); }
+
+    /* ---------- Hero ---------- */
+    .hero { padding: 120px 0 90px; background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size: 48px 48px; background-position: -1px -1px; }
+    .hero h1 { font-size: clamp(3rem, 9vw, 6rem); max-width: 14ch; }
+    .hero p { color: var(--muted); max-width: 52ch; margin: 24px 0 36px; font-size: 1.1rem; }
+    .hero .btns { display: flex; gap: 16px; flex-wrap: wrap; }
+
+    /* ---------- Ticker (chalti hui patti) ---------- */
+    .ticker { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); overflow: hidden; white-space: nowrap; padding: 22px 0; }
+    .ticker-track { display: inline-block; animation: scroll 30s linear infinite; }
+    .ticker span { font-family: var(--mono); font-size: .8rem; letter-spacing: .18em; text-transform: uppercase; color: var(--purple-soft); margin: 0 22px; }
+    @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* ---------- What We Build ---------- */
+    .section-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; margin-bottom: 56px; flex-wrap: wrap; }
+    .section-head p { color: var(--muted); max-width: 36ch; }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 32px; display: flex; flex-direction: column; }
+    .tag { font-family: var(--mono); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--purple-soft); }
+    .card h3 { font-size: 1.9rem; margin: 28px 0 14px; }
+    .card p { color: var(--muted); }
+    .card .foot { margin-top: auto; padding-top: 20px; border-top: 1px solid var(--line); font-family: var(--mono); font-size: .75rem; color: var(--purple-soft); }
+    .card p + .foot { margin-top: 32px; }
+
+    /* ---------- Precision Studio ---------- */
+    .studio p.lead { color: var(--muted); margin: 24px 0; }
+    .points { list-style: none; display: grid; gap: 14px; font-family: var(--mono); font-size: .85rem; }
+    .points li::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--purple-soft); margin-right: 14px; }
+    .studio-img { position: relative; margin-top: 48px; height: 380px; border: 1px solid var(--line); border-radius: 16px; overflow: hidden;
+      background: #05051a; }
+    .studio-img .cap { position: absolute; left: 0; right: 0; bottom: 0; padding: 18px 24px; background: rgba(5,5,15,.85); font-family: var(--mono); font-size: .75rem; letter-spacing: .14em; text-transform: uppercase; color: var(--purple-soft); }
+
+    /* ---------- About ---------- */
+    .about p { color: var(--muted); margin-top: 24px; max-width: 80ch; }
+    .about p.small { font-size: .95rem; }
+    .endorse { margin-top: 48px; background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 28px; }
+    .endorse .box { background: var(--field); border: 1px solid var(--line); border-radius: 8px; padding: 18px 22px; font-style: italic; color: var(--muted); font-size: .95rem; }
+
+    /* ---------- Contact ---------- */
+    .contact { text-align: center; }
+    .contact > .wrap > p { color: var(--muted); margin-top: 16px; }
+    form { text-align: left; max-width: 580px; margin: 40px auto 0; background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 40px; display: grid; gap: 20px; }
+    label { font-family: var(--mono); font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+    input, textarea { display: block; width: 100%; margin-top: 10px; padding: 14px 16px; background: var(--field); color: var(--text); border: 1px solid var(--line); border-radius: 8px; font: inherit; }
+    input::placeholder, textarea::placeholder { color: #6b6c88; }
+    #form-msg { color: var(--purple-soft); font-family: var(--mono); font-size: .85rem; min-height: 1.4em; }
+    footer { border-top: 1px solid var(--line); padding: 32px 0; text-align: center; color: var(--muted); font-family: var(--mono); font-size: .75rem; }
+
+    /* ---------- Mobile ---------- */
+    @media (max-width: 860px) {
+      nav ul { display: none; }
+      .cards { grid-template-columns: 1fr; }
+      form { padding: 24px; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <div class="wrap">
+      <a href="#top" class="logo"><span class="logo-icon">N</span>Nova Tech</a>
+      <ul>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#studio">Studio</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a href="#contact" class="btn">Start Project</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero" id="top">
+    <div class="wrap">
+      <h1>Digital engineering, built right</h1>
+      <p>Nova Tech designs and develops fast websites, web applications and mobile interfaces for growing businesses.</p>
+      <div class="btns">
+        <a href="#contact" class="btn">Launch Enquiry Form</a>
+        <a href="#services" class="btn btn-ghost">Explore Capabilities</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- TICKER: content 2 baar likha hai taaki loop smooth chale -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span>Mobile App Development</span><span>•</span><span>Interactive Systems</span><span>•</span><span>Clean Performance UI</span><span>•</span><span>Nova Tech</span><span>•</span>
+      <span>Mobile App Development</span><span>•</span><span>Interactive Systems</span><span>•</span><span>Clean Performance UI</span><span>•</span><span>Nova Tech</span><span>•</span>
+    </div>
+  </div>
+
+  <!-- WHAT WE BUILD -->
+  <section id="services">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <span class="label">Core Capabilities</span>
+          <h2>What we build</h2>
+        </div>
+        <p>Dedicated engineering from wireframe to deploy with clean code standards.</p>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <span class="tag">01 / Web</span>
+          <h3>Custom Websites</h3>
+          <p>High-speed marketing sites and company portals engineered for conversion.</p>
+          <div class="foot">Responsive · Accessible</div>
+        </article>
+        <article class="card">
+          <span class="tag">02 / Apps</span>
+          <h3>Web Applications</h3>
+          <p>Interactive software dashboards and client portals with reactive state architecture.</p>
+          <div class="foot">Full-Stack · Cloud Ready</div>
+        </article>
+        <article class="card">
+          <span class="tag">03 / Mobile</span>
+          <h3>Mobile Interfaces</h3>
+          <p>Adaptive mobile-first experiences built for fluid touch interactions.</p>
+          <div class="foot">iOS &amp; Android Ready</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRECISION STUDIO -->
+  <section id="studio" class="studio">
+    <div class="wrap">
+      <span class="label">Craft &amp; Environment</span>
+      <h2>Precision Studio</h2>
+      <p class="lead">Every interface is composed with typographic rigor, dark navy depth, and deliberate interactive pacing.</p>
+      <ul class="points">
+        <li>Strict performance budget on every build</li>
+        <li>Fluid layout adaptation down to 320px</li>
+      </ul>
+            <div class="studio-img" role="img" aria-label="Engineering environment">
+        <svg viewBox="0 0 1000 380" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%">
+  <defs>
+    <linearGradient id="room" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#14186b"/><stop offset="1" stop-color="#05051a"/></linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#8fa8ff" stop-opacity=".55"/><stop offset="1" stop-color="#8fa8ff" stop-opacity="0"/></radialGradient>
+    <radialGradient id="screenglow" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#2f6bff" stop-opacity=".45"/><stop offset="1" stop-color="#2f6bff" stop-opacity="0"/></radialGradient>
+    <linearGradient id="desk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a3a6e"/><stop offset="1" stop-color="#0c0c26"/></linearGradient>
+  </defs>
+  <rect width="1000" height="380" fill="url(#room)"/>
+  <circle cx="320" cy="110" r="200" fill="url(#glow)"/>
+  <ellipse cx="500" cy="150" rx="320" ry="190" fill="url(#screenglow)"/>
+  <!-- desk -->
+  <rect y="300" width="1000" height="80" fill="url(#desk)"/>
+  <!-- lamp -->
+  <ellipse cx="200" cy="300" rx="34" ry="7" fill="#d9defa"/>
+  <polyline points="200,298 232,175 300,98" fill="none" stroke="#c9d0f5" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M276 84 L340 70 L322 126 Z" fill="#e8ecff"/>
+  <ellipse cx="318" cy="112" rx="22" ry="8" fill="#ffffff" transform="rotate(-20 318 112)"/>
+  <!-- monitor -->
+  <rect x="496" y="225" width="18" height="70" fill="#2a2a4a"/>
+  <rect x="440" y="290" width="130" height="10" rx="3" fill="#3b3b66"/>
+  <rect x="332" y="26" width="336" height="202" rx="6" fill="#0a0a1c"/>
+  <rect x="340" y="34" width="320" height="186" rx="3" fill="#1747c9"/>
+  <rect x="362" y="46" width="43" height="3" rx="1.5" fill="#c9d8ff" opacity=".85"/><rect x="410" y="46" width="22" height="3" rx="1.5" fill="#5df28a" opacity=".85"/><rect x="362" y="56" width="21" height="3" rx="1.5" fill="#5df28a" opacity=".85"/><rect x="389" y="56" width="20" height="3" rx="1.5" fill="#7fd1ff" opacity=".85"/><rect x="417" y="56" width="44" height="3" rx="1.5" fill="#7fd1ff" opacity=".85"/><rect x="467" y="56" width="23" height="3" rx="1.5" fill="#5df28a" opacity=".85"/><rect x="352" y="66" width="25" height="3" rx="1.5" fill="#5df28a" opacity=".85"/><rect x="387" y="66" width="58" height="3" rx="1.5" fill="#5df28a" opacity=".85"/><rect x="450" y="66" width="54" height="3" rx="1.5" fill="#5df28a" opacity=".85"/><rect x="512" y="66" width="21" height="3" rx="1.5" fill="#5df28a" opacity=".85"/><rect x="382" y="76" width="36" height="3" rx="1.5" fill="#9db8ff" opacity=".85"/><rect x="424" y="76" width="52" height="3" rx="1.5" fill="#7fd1ff" opacity=".85"/><rect x="362" y="86" width="29" height="3" rx="1.5" fill="#7fd1ff" opacity=".85"/><rect x="400" y="86" width="54" height="3" rx="1.5" fill="#c9d8ff" opacity=".85"/><rect x="460" y="86" width="41" height="3" rx="1.5" fill="#7fd1ff" opacity=".85"/><rect x="510" y="86" width="22" height="3" rx="1.5" fill="#5df28a" opacity=".85"/><rect x="382" y="96" width="49" height="3" rx="1.5" fill="#c9d8ff" opacity=".85"/><rect x="440" y="96" width="45" height="3" rx="1.5" fill="#ffffff" opacity=".85"/><rect x="382" y="106" width="41" height="3" rx="1.5" fill="#ffffff" opacity=".85"/><rect x="429" y="106" width="29" height="3" rx="1.5" fill="#c9d8ff" opacity=".85"/><rect x="464" y="106" width="23" height="3" rx="1.5" fill="#5df28a" opacity=".85"/><rect x="382" y="116" width="39" height="3" rx="1.5" fill="#c9d8ff" opacity=".85"/><rect x="429" y="116" width="36" height="3" rx="1.5" fill="#5df28a" opacity=".85"/><rect x="470" y="116" width="25" height="3" rx="1.5" fill="#5df28a" opacity=".85"/><rect x="352" y="126" width="27" height="3" rx="1.5" fill="#9db8ff" opacity=".85"/><rect x="387" y="126" width="20" height="3" rx="1.5" fill="#c9d8ff" opacity=".85"/><rect x="412" y="126" width="53" height="3" rx="1.5" fill="#5df28a" opacity=".85"/><rect x="362" y="136" width="40" height="3" rx="1.5" fill="#5df28a" opacity=".85"/><rect x="410" y="136" width="55" height="3" rx="1.5" fill="#9db8ff" opacity=".85"/><rect x="470" y="136" width="23" height="3" rx="1.5" fill="#ffffff" opacity=".85"/><rect x="501" y="136" width="60" height="3" rx="1.5" fill="#7fd1ff" opacity=".85"/><rect x="362" y="146" width="54" height="3" rx="1.5" fill="#c9d8ff" opacity=".85"/><rect x="424" y="146" width="36" height="3" rx="1.5" fill="#c9d8ff" opacity=".85"/><rect x="468" y="146" width="60" height="3" rx="1.5" fill="#ffffff" opacity=".85"/><rect x="533" y="146" width="47" height="3" rx="1.5" fill="#ffffff" opacity=".85"/><rect x="382" y="156" width="49" height="3" rx="1.5" fill="#7fd1ff" opacity=".85"/><rect x="437" y="156" width="36" height="3" rx="1.5" fill="#5df28a" opacity=".85"/><rect x="352" y="166" width="43" height="3" rx="1.5" fill="#9db8ff" opacity=".85"/><rect x="400" y="166" width="28" height="3" rx="1.5" fill="#9db8ff" opacity=".85"/><rect x="436" y="166" width="53" height="3" rx="1.5" fill="#ffffff" opacity=".85"/><rect x="372" y="176" width="35" height="3" rx="1.5" fill="#c9d8ff" opacity=".85"/><rect x="415" y="176" width="40" height="3" rx="1.5" fill="#c9d8ff" opacity=".85"/><rect x="463" y="176" width="32" height="3" rx="1.5" fill="#5df28a" opacity=".85"/><rect x="500" y="176" width="29" height="3" rx="1.5" fill="#5df28a" opacity=".85"/><rect x="352" y="186" width="49" height="3" rx="1.5" fill="#5df28a" opacity=".85"/><rect x="407" y="186" width="34" height="3" rx="1.5" fill="#ffffff" opacity=".85"/><rect x="352" y="196" width="52" height="3" rx="1.5" fill="#ffffff" opacity=".85"/><rect x="413" y="196" width="54" height="3" rx="1.5" fill="#ffffff" opacity=".85"/><rect x="473" y="196" width="50" height="3" rx="1.5" fill="#5df28a" opacity=".85"/><rect x="352" y="206" width="53" height="3" rx="1.5" fill="#9db8ff" opacity=".85"/><rect x="413" y="206" width="43" height="3" rx="1.5" fill="#9db8ff" opacity=".85"/><rect x="461" y="206" width="48" height="3" rx="1.5" fill="#c9d8ff" opacity=".85"/>
+  <!-- keyboard -->
+  <rect x="398" y="316" width="190" height="34" rx="4" fill="#0e1235"/>
+  <rect x="408" y="322" width="13" height="6" rx="1.5" fill="#1a2250"/><rect x="424" y="322" width="13" height="6" rx="1.5" fill="#1a2250"/><rect x="440" y="322" width="13" height="6" rx="1.5" fill="#1a2250"/><rect x="456" y="322" width="13" height="6" rx="1.5" fill="#1a2250"/><rect x="472" y="322" width="13" height="6" rx="1.5" fill="#1a2250"/><rect x="488" y="322" width="13" height="6" rx="1.5" fill="#1a2250"/><rect x="504" y="322" width="13" height="6" rx="1.5" fill="#1a2250"/><rect x="520" y="322" width="13" height="6" rx="1.5" fill="#1a2250"/><rect x="536" y="322" width="13" height="6" rx="1.5" fill="#1a2250"/><rect x="552" y="322" width="13" height="6" rx="1.5" fill="#1a2250"/><rect x="568" y="322" width="13" height="6" rx="1.5" fill="#1a2250"/><rect x="408" y="331" width="13" height="6" rx="1.5" fill="#1a2250"/><rect x="424" y="331" width="13" height="6" rx="1.5" fill="#1a2250"/><rect x="440" y="331" width="13" height="6" rx="1.5" fill="#1a2250"/><rect x="456" y="331" width="13" height="6" rx="1.5" fill="#1a2250"/><rect x="472" y="331" width="13" height="6" rx="1.5" fill="#1a2250"/><rect x="488" y="331" width="13" height="6" rx="1.5" fill="#1a2250"/><rect x="504" y="331" width="13" height="6" rx="1.5" fill="#1a2250"/><rect x="520" y="331" width="13" height="6" rx="1.5" fill="#1a2250"/><rect x="536" y="331" width="13" height="6" rx="1.5" fill="#1a2250"/><rect x="552" y="331" width="13" height="6" rx="1.5" fill="#1a2250"/><rect x="568" y="331" width="13" height="6" rx="1.5" fill="#1a2250"/><rect x="408" y="340" width="13" height="6" rx="1.5" fill="#1a2250"/><rect x="424" y="340" width="13" height="6" rx="1.5" fill="#1a2250"/><rect x="440" y="340" width="13" height="6" rx="1.5" fill="#1a2250"/><rect x="456" y="340" width="13" height="6" rx="1.5" fill="#1a2250"/><rect x="472" y="340" width="13" height="6" rx="1.5" fill="#1a2250"/><rect x="488" y="340" width="13" height="6" rx="1.5" fill="#1a2250"/><rect x="504" y="340" width="13" height="6" rx="1.5" fill="#1a2250"/><rect x="520" y="340" width="13" height="6" rx="1.5" fill="#1a2250"/><rect x="536" y="340" width="13" height="6" rx="1.5" fill="#1a2250"/><rect x="552" y="340" width="13" height="6" rx="1.5" fill="#1a2250"/><rect x="568" y="340" width="13" height="6" rx="1.5" fill="#1a2250"/>
+  <!-- plant -->
+  <path d="M830 300 q-10 -90 -50 -130 q45 20 62 95 q4 -90 50 -150 q-6 90 -22 185z" fill="#05081a"/>
+  <path d="M850 300 q30 -70 90 -90 q-40 30 -50 90z" fill="#070b22"/>
+  <path d="M815 300 q-50 -40 -110 -40 q60 5 95 40z" fill="#070b22"/>
+  <rect x="812" y="296" width="62" height="40" rx="4" fill="#0a0d2a"/>
+</svg>
+        <div class="cap">Engineering Environment · Nova Tech</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="about">
+    <div class="wrap">
+      <span class="label">About Us</span>
+      <h2>Direct Collaboration</h2>
+      <p>Nova Tech operates as a focused digital engineering partner. We take projects directly from specification to deployment without bloated agency layers.</p>
+      <p class="small">We write clean, testable frontend systems paired with scalable backend APIs designed to support growing businesses.</p>
+      <div class="endorse">
+        <span class="label">Client Endorsements</span>
+        <div class="box">Endorsements and project debriefs from our current build cycle will be published here.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <h2>Start your build</h2>
+      <p>Tell us about your application, timeline, or design goals.</p>
+      <!-- formspree.io par free account banakar YOUR_FORM_ID badlein -->
+      <form id="enquiry" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <label>Your Name <input type="text" name="name" placeholder="Alex Morgan" required></label>
+        <label>Work Email <input type="email" name="email" placeholder="alex@company.com" required></label>
+        <label>Project Brief <textarea name="message" rows="4" placeholder="Describe what you want to build" required></textarea></label>
+        <button class="btn" type="submit">Send Enquiry</button>
+        <p id="form-msg" role="status"></p>
+      </form>
+    </div>
+  </section>
+
+  <footer>© 2026 Nova Tech. All rights reserved.</footer>
+
+  <script>
+    // Form bhejne par page reload nahi hota, message dikhta hai
+    const form = document.getElementById("enquiry");
+    const msg = document.getElementById("form-msg");
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      msg.textContent = "Sending...";
+      try {
+        const res = await fetch(form.action, { method: "POST", body: new FormData(form), headers: { Accept: "application/json" } });
+        if (res.ok) { msg.textContent = "Thanks! We received your enquiry."; form.reset(); }
+        else { msg.textContent = "Could not send. Please try again."; }
+      } catch (err) { msg.textContent = "Network error. Please try again."; }
+    });
+  </script>
+</body>
+</html>
